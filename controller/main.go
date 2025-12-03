@@ -41,7 +41,6 @@ func (c *Controller) pollOnce() {
 		url := fmt.Sprintf("http://%s/list", agent)
 		resp, err := c.httpClient.Get(url)
 		if err != nil {
-			// agent down — skip
 			continue
 		}
 		body, _ := io.ReadAll(resp.Body)
@@ -149,7 +148,7 @@ func (c *Controller) scaleHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	agents := []string{"localhost:9000", "localhost:9001", "localhost:9002"} // добавь здесь все агенты
+	agents := []string{"localhost:9000", "localhost:9001", "localhost:9002"}
 	controller := NewController(agents, 3)
 
 	go func() {
